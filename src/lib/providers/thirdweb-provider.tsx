@@ -1,7 +1,6 @@
 "use client";
 
-import { ThirdwebProvider } from "thirdweb/react";
-import { client } from "@/utils/createThirdwebClient";
+import { ThirdwebProvider } from "@thirdweb-dev/react";
 
 const activeChain = "ethereum";
 
@@ -12,12 +11,12 @@ export default function ThirdWebProvider({
 }) {
   return (
     <ThirdwebProvider
-      client={client}
-      // activeChain={activeChain}
-      // authConfig={{
-      //   domain: process.env.NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN || "",
-      //   authUrl: "/api/auth",
-      // }}
+      clientId={process.env.NEXT_PUBLIC_TEMPLATE_CLIENT_ID}
+      activeChain={activeChain}
+      authConfig={{
+        domain: process.env.NEXT_PUBLIC_THIRDWEB_AUTH_DOMAIN || "",
+        authUrl: "/api/auth",
+      }}
     >
       {children}
     </ThirdwebProvider>

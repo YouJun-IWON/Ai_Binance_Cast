@@ -14,7 +14,7 @@ import { DEFAULT_LOGIN_PROBLEM_REDIRECT } from "@/routes";
 import useUserServer from "@/hooks/useUser/useUserServer";
 import { ModeToggle } from "./components/theme-toggle";
 import { Loader } from "../shared";
-import { ConnectButton } from "thirdweb/react";
+import { ConnectWallet } from "@thirdweb-dev/react";
 
 const LeftSidebar = () => {
   const { isFetching, data: user } = useUserServer();
@@ -94,7 +94,7 @@ const LeftSidebar = () => {
             {/*<div>*/}
             {/*  <pre>Connected Wallet: {address} </pre>*/}
             {/*</div>*/}
-            <ConnectButton />
+            <ConnectWallet />
           </div>
         )}
 
