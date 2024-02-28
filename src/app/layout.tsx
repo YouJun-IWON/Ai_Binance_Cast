@@ -1,12 +1,13 @@
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import './globals.css';
-import { ThemeProvider } from '@/lib/providers/theme-provider';
-import QueryProvider from '@/lib/providers/query-provider';
-import { ModalProvider } from '@/lib/providers/modal-provider';
-import siteMetadata from '@/utils/siteMetaData';
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import "./globals.css";
+import { ThemeProvider } from "@/lib/providers/theme-provider";
+import QueryProvider from "@/lib/providers/query-provider";
+import { ModalProvider } from "@/lib/providers/modal-provider";
+import ThirdWebProvider from "@/lib/providers/thirdweb-provider";
+import siteMetadata from "@/utils/siteMetaData";
 
-const inter = Inter({ subsets: ['latin'] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteMetadata.siteUrl),
@@ -22,8 +23,8 @@ export const metadata: Metadata = {
     url: siteMetadata.siteUrl,
     siteName: siteMetadata.title,
     images: [siteMetadata.socialBanner],
-    locale: 'ko-KR',
-    type: 'website',
+    locale: "ko-KR",
+    type: "website",
   },
   robots: {
     // google bot
@@ -33,13 +34,13 @@ export const metadata: Metadata = {
       index: true,
       follow: false,
       noimageindex: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   twitter: {
-    card: 'summary_large_image',
+    card: "summary_large_image",
     title: siteMetadata.title,
     description: siteMetadata.description,
     images: [siteMetadata.socialBanner],
@@ -52,18 +53,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en' suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <QueryProvider>
-          <ThemeProvider
-            attribute='class'
-            defaultTheme='system'
-            enableSystem
-            disableTransitionOnChange
-          >
-            <ModalProvider />
-            {children}
-          </ThemeProvider>
+          <ThirdWebProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <ModalProvider />
+              {children}
+            </ThemeProvider>
+          </ThirdWebProvider>
         </QueryProvider>
       </body>
     </html>
