@@ -1,18 +1,21 @@
-'use client';
-import Loader from '@/components/shared/Loader';
-import { Button } from '@/components/ui/button';
-import { cn, multiFormatDateString } from '@/utils';
-import Image from 'next/image';
-import Link from 'next/link';
-import { notFound, useRouter } from 'next/navigation';
-import { AgendaAgreeAccordion } from '@/components/accordians/agenda-detail/agenda-detail-agree';
-import { AgendaDisagreeAccordion } from '@/components/accordians/agenda-detail/agenda-detail-disagree';
-import useDetailAgendasServer from '@/hooks/useAgendas/useDetailAgenda';
-import { useEffect, useState } from 'react';
-import { useAction } from 'next-safe-action/hooks';
-import { updateAgendaViewsServer } from '../../../../../server/actions/agenda-actions/update/views-agenda';
-import DetailAgendaStats from '../../../../components/cards/agenda-detail_stats';
-import AgendaDetailCardMenu from '@/components/menu/agenda-detail-card-menu';
+"use client";
+import Loader from "@/components/shared/Loader";
+import { Button } from "@/components/ui/button";
+import { cn, multiFormatDateString } from "@/utils";
+import Image from "next/image";
+import Link from "next/link";
+import { notFound, useRouter } from "next/navigation";
+import { AgendaAgreeAccordion } from "@/components/accordians/agenda-detail/agenda-detail-agree";
+import { AgendaDisagreeAccordion } from "@/components/accordians/agenda-detail/agenda-detail-disagree";
+import useDetailAgendasServer from "@/hooks/useAgendas/useDetailAgenda";
+import { useEffect, useState } from "react";
+import { useAction } from "next-safe-action/hooks";
+import { updateAgendaViewsServer } from "../../../../../server/actions/agenda-actions/update/views-agenda";
+import DetailAgendaStats from "../../../../components/cards/agenda-detail_stats";
+import AgendaDetailCardMenu from "@/components/menu/agenda-detail-card-menu";
+
+//JW
+import SubmitChat from "@/components/submit/submint_chat";
 
 const AgendaChoose = ({ params }: { params: { id: string } }) => {
   const id = params.id;
@@ -36,7 +39,7 @@ const AgendaChoose = ({ params }: { params: { id: string } }) => {
 
   if (isFetching) {
     return (
-      <div className='isfetching-flex'>
+      <div className="isfetching-flex">
         <Loader />
       </div>
     );
@@ -53,29 +56,29 @@ const AgendaChoose = ({ params }: { params: { id: string } }) => {
   }
 
   return (
-    <div className='agenda_details-container'>
-      <div className='hidden max-w-5xl md:flex w-full '>
+    <div className="agenda_details-container">
+      <div className="hidden max-w-5xl md:flex w-full ">
         <Button
-          onClick={() => router.push('/')}
-          variant='ghost'
-          className='shad-button_ghost'
+          onClick={() => router.push("/")}
+          variant="ghost"
+          className="shad-button_ghost"
         >
-          <Image src={'/icons/back.svg'} alt='back' width={24} height={24} />
-          <p className='small-medium lg:base-medium'>Back</p>
+          <Image src={"/icons/back.svg"} alt="back" width={24} height={24} />
+          <p className="small-medium lg:base-medium">Back</p>
         </Button>
       </div>
 
-      <div className='agenda_details-card'>
+      <div className="agenda_details-card">
         <Image
-          src={agendaDetail.image_url || ''}
-          alt='creator'
-          className='agenda_details-img'
+          src={agendaDetail.image_url || ""}
+          alt="creator"
+          className="agenda_details-img"
           width={400}
           height={400}
         />
 
-        <div className='agenda_details-info'>
-          <div className='flex-between w-full'>
+        <div className="agenda_details-info">
+          <div className="flex-between w-full">
             {/* <Link
               href={`/profile/${agendaDetail.creator.id}`}
               className='flex items-center gap-3'
@@ -102,26 +105,26 @@ const AgendaChoose = ({ params }: { params: { id: string } }) => {
               </div>
             </Link> */}
 
-            <div className='flex-center gap-4'>
+            <div className="flex-center gap-4">
               <AgendaDetailCardMenu
                 detailContent={agendaDetail.content_detail}
               />
             </div>
           </div>
 
-          <hr className='border w-full border-dark-4/80' />
+          <hr className="border w-full border-dark-4/80" />
 
-          <div className='flex  flex-col flex-wrap  flex-1 w-full lg:base-regular'>
-            <ul className='mt-2 my-6 ml-4 list-disc [&>li]:mt-2 flex flex-col justify-around flex-1'>
+          <div className="flex  flex-col flex-wrap  flex-1 w-full lg:base-regular">
+            <ul className="mt-2 my-6 ml-4 list-disc [&>li]:mt-2 flex flex-col justify-around flex-1">
               {agendaDetail.content.map((content: string, index: string) => (
                 <li key={`${content}${index}`}>{content}</li>
               ))}
             </ul>
-            <ul className='flex flex-wrap gap-1 mt-2'>
+            <ul className="flex flex-wrap gap-1 mt-2">
               {agendaDetail.tags.map((tag: string, index: string) => (
                 <li
                   key={`${tag}${index}`}
-                  className='text-light-3 small-regular'
+                  className="text-light-3 small-regular"
                 >
                   #{tag}
                 </li>
@@ -129,13 +132,13 @@ const AgendaChoose = ({ params }: { params: { id: string } }) => {
             </ul>
           </div>
 
-          <div className='w-full'>
+          <div className="w-full">
             <DetailAgendaStats agenda={agendaDetail} />
           </div>
         </div>
       </div>
 
-      <div className='max-w-5xl grid grid-cols-1 sm:grid-cols-2 w-full gap-10 '>
+      <div className="max-w-5xl grid grid-cols-1 sm:grid-cols-2 w-full gap-10 ">
         <AgendaAgreeAccordion
           disagreeClicked={disagreeClicked}
           setAgreeClicked={setAgreeClicked}
@@ -148,10 +151,15 @@ const AgendaChoose = ({ params }: { params: { id: string } }) => {
         />
       </div>
 
-      <div className='w-full max-w-5xl'>
-        <hr className='border w-full border-dark-4/80' />
+      {/* JW */}
+      <div>
+        <SubmitChat agenda={agendaDetail} />
+      </div>
 
-        <h3 className='body-bold md:h3-bold w-full my-10'>
+      <div className="w-full max-w-5xl">
+        <hr className="border w-full border-dark-4/80" />
+
+        <h3 className="body-bold md:h3-bold w-full my-10">
           More Related agendas
         </h3>
         {/* {isUseragendaLoading || !relatedagendas ? (
