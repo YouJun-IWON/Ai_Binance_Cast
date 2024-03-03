@@ -16,28 +16,28 @@ type SpokespersonCardProps = {
 
 const SpokespersonCard = ({ spokesperson }: SpokespersonCardProps) => {
   return (
-    <div className="inline-flex w-80 p-8 flex-col items-center gap-6 rounded-lg border border-opacity-10 custom-border-color">
-      <div className="flex flex-col items-center">
-        <div className="w-32 h-32 rounded-full overflow-hidden bg-gray-200 justify-center items-center">
+    <div className="inline-flex w-80 p-5 flex-col items-center gap-4 rounded-2xl border border-opacity-10 custom-border-color">
+      <div className="flex flex-row items-center justify-start w-full gap-1">
+        <div className="w-11 h-11 rounded-full overflow-hidden bg-gray-200 justify-center items-center">
           <Image
             src={spokesperson.imageUrl || "/icons/spokesperson.svg"}
             alt={spokesperson.name}
-            width={128}
-            height={128}
+            width={44}
+            height={44}
             style={{ borderRadius: "50%" }}
           />
         </div>
-        <p className="text-xs font-medium leading-5 mt-1">
+        <p className="text-xs font-medium leading-5 text-primary-300 text-opacity-60 mt-1">
           {spokesperson.name}
         </p>
-        <p className="text-base mt-2">{spokesperson.title}</p>
       </div>
+      <p className="text-base">{spokesperson.title}</p>
       <div className="flex gap-1 justify-center w-full h-12">
-        <div className="flex flex-row justify-between items-center w-80 h-12 bg-blue-900 py-2 px-4 rounded-l-xl">
+        <div className="flex flex-row justify-between items-center w-80 h-12 bg-gradient-to-r from-gradient-1 to-gradient-2 py-2 px-4 rounded-l-xl">
           <p className="text-xl text-white">찬성</p>
           <p className="text-xl text-white">{spokesperson.agreeRatio}%</p>
         </div>
-        <div className="flex flex-row justify-between items-center w-full h-12 bg-blue-700 py-2 px-4 rounded-r-xl ">
+        <div className="flex flex-row justify-between items-center w-full h-12 bg-primary-200 opacity-40 py-2 px-4 rounded-r-xl ">
           <p className="text-sm text-white">{spokesperson.disagreeRatio}%</p>
           <p className="text-sm text-white">반대</p>
         </div>
