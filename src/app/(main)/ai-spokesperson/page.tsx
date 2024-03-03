@@ -2,19 +2,18 @@
 import Image from "next/image";
 import SpokespersonCard from "@/components/cards/spokesperson-card";
 
-const spokespersonDummy = {
-  key: 2415,
-  imageUrl: "",
-  name: "대변인 이름",
-  title: "제목제목제목제목",
-  agreeRatio: 68,
-  disagreeRatio: 32,
-  participantsCount: 2344,
-  inputWordCount: 264532,
-  hasVoted: true,
-};
-
 const spokespersonDummyList = [
+  {
+    key: 2415,
+    imageUrl: "",
+    name: "대변인 이름",
+    title: "제목제목제목제목",
+    agreeRatio: 68,
+    disagreeRatio: 32,
+    participantsCount: 2344,
+    inputWordCount: 264532,
+    hasVoted: true,
+  },
   {
     key: 0,
     imageUrl: "",
@@ -77,15 +76,11 @@ const People = () => {
             <h2 className="h3-bold md:h2-bold text-left w-full">AI 대변인들</h2>
           </div>
 
-          <ul className="flex flex-col flex-1 gap-9 w-full ">
-            {/* {agendas.map((agenda: any) => (
-              <AgendaCard agenda={agenda} key={agenda.id} />
-            ))} */}
+          <div className="grid justify-items-center lg:grid-cols-2 gap-x-5 gap-y-3 w-full ">
             {spokespersonDummyList.map((props) => (
               <SpokespersonCard spokesperson={props} key={props.key} />
             ))}
-            <SpokespersonCard spokesperson={spokespersonDummy} />
-          </ul>
+          </div>
         </div>
       </div>
 
