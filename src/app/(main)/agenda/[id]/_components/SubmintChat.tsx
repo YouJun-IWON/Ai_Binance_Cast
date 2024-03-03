@@ -1,6 +1,5 @@
 import { useContext, useState } from "react";
 import { useAccount } from "wagmi";
-import { example } from "../../example..json";
 import { getOffchainAuthKeys } from "@/utils/offchainAuth";
 import { ReedSolomon } from "@bnb-chain/reed-solomon";
 import { client, selectSp } from "@/client";
@@ -12,6 +11,7 @@ const SubmitChat = ({ agenda }: any) => {
   const [file, setFile] = useState<File | null>(null);
   const { messages } = useContext(MessagesContext);
   console.log(messages);
+
   const [info, setInfo] = useState<{
     bucketName: string;
     objectName: string;
@@ -24,22 +24,21 @@ const SubmitChat = ({ agenda }: any) => {
   return (
     <div>
       <p>{bucketName}</p>
-      <p>{address}</p>
       <>
         <div className="box">
           <div className="field">
             <button
               className={"button is-primary"}
               onClick={async () => {
-                const jsonObject = example;
+                const chatObject = { chat: messages };
                 // JSON 객체를 문자열로 변환
-                const jsonString = JSON.stringify(jsonObject);
+                const jsonString = JSON.stringify(chatObject);
                 // 문자열을 Blob으로 변환
                 const blob = new Blob([jsonString], {
                   type: "application/json",
                 });
                 // Blob을 File 객체로 변환
-                const result = new File([blob], "example.json", {
+                const result = new File([blob], agenda.subject, {
                   type: "application/json",
                 });
                 setFile(result);
